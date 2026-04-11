@@ -1,0 +1,59 @@
+body{
+    display: grid;
+    padding-top: 2rem;
+    grid-template: 
+        "top-area" 1fr
+        "bottom-area" 1fr;
+}
+.input-box{
+    grid-area: top-area;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template: 
+        "name amut" 1fr
+        "label alert" 1fr
+        "btnSave btnSave" 1fr
+        /1fr 1fr;
+    width: 50rem;
+    height: 20rem;
+    padding: 2rem;
+    border-radius: 10px;
+    background: #FFFDEB;
+    align-items: center;
+    justify-items: center;
+    box-shadow: #E8DBB3 0rem 1rem 2rem ;
+}
+.input-box input{
+    margin: 1rem;
+    height: 2rem;
+    width: 20rem;
+}
+.input-box #name{
+    grid-area: name;
+}
+.input-box #amut{
+    grid-area: amut;
+}
+.input-box #label{
+    grid-area: label;
+}
+.input-box #alert{
+    grid-area: alert;
+}
+.input-box #btnSave{
+    grid-area: btnSave;
+    width: 10rem;
+    height: 2.75rem;
+}
+.output{
+    grid-area: bottom-area;
+}
+.container h1{
+    border-bottom: solid 0.15rem;
+    width: 20rem;
+}
+.product{
+    display: flex;
+    background-color: #BFC6C4;
+}

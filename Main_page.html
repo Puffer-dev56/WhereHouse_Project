@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>WhereHouse</title>
 </head>
 <body>
-    
+    <div class="input-box">
+        <input id="name" type="text" placeholder="ชื่อสินค้า">
+        <input id="amut" type="number" placeholder="เพิ่ม/ลด จำนวนสินค้า">
+        <input id="alert" type="number" min="0" placeholder="จำนวนที่ต้องการให้ระบบแจ้งเตือน">
+        <input id="label" type="text" placeholder="บันทึกช่วยจำ">
+        <button id="btnSave">บันทึกรายการสินค้า</button>
+    </div>
+    <div class="output">
+        <div class="container">
+            <h1>รายการสินค้า</h1>
+            <div class="goods">
+                <!-- รายการสินค้าที่อยู่ในคลัง -->
+            </div>
+        </div>
+        <div class="container">
+            <h1>ประวัติ</h1>
+            <div class="history">
+                <!-- ประวัติสินค้า -->
+            </div>
+        </div>
+    </div>
 </body>
+<script src="script.js"></script>
 </html>
