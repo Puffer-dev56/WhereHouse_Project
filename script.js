@@ -50,7 +50,7 @@ function OrderList(){
         let order_name = document.createElement("div");
         let order_amut = document.createElement("div");
         order_amut.className = "order_amut";
-        order.className = "product";
+        order.className = proWorning(pros[i][1],pros[i][2]);
         order_name.innerText = pros[i][0];
         order_amut.innerText = pros[i][1];
         order.append(order_name,order_amut);
@@ -77,6 +77,15 @@ function RemoveStok(amut,i){
         pros[i][1] = newAmut;
         pros[i][3] = pro_label.value;
         HistoryList(pros[i],pro_amut.value,"");
+    }
+}
+
+//Out of stock
+function proWorning(amut,proAlert){
+    if(amut <= proAlert){
+        return "proAlert";
+    }else{
+        return "product";
     }
 }
 

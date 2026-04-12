@@ -65,3 +65,15 @@ body{
 .product .order_amut{
     border-left: solid 0.15rem;
 }
+.proAlert{
+    display: flex;
+    background-color: #FF3838;
+}
+.goods .proAlert div{
+    display: flex;
+    width: 50%;
+    padding-left: 0.5rem;
+}
+.proAlert .order_amut{
+    border-left: solid 0.15rem;
+}
