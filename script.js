@@ -23,7 +23,7 @@ function getProduct(){
     // check if products are in the list
     for(let i=0; i<pros.length; i++){
         if(pros[i][0] === pro_name.value){
-            if(parseInt(pro_amut.value) < 0){
+            if(parseInt(pro_amut.value) < 0){-
                 RemoveStok(pros[i][1],i);
             }else if(parseInt(pro_amut.value) > 0){
                 AddStock(pros[i][1],i)
@@ -75,6 +75,7 @@ function RemoveStok(amut,i){
         return;
     }else{
         pros[i][1] = newAmut;
+        pros[i][3] = pro_label.value;
         HistoryList(pros[i],pro_amut.value,"");
     }
 }
@@ -83,5 +84,6 @@ function RemoveStok(amut,i){
 function AddStock(amut,i){
     let newAmut = parseInt(amut) + parseInt(pro_amut.value);
     pros[i][1] = newAmut;
+    pros[i][3] = pro_label.value;
     HistoryList(pros[i],pro_amut.value,"+"); 
 }
