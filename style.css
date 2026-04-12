@@ -2,7 +2,7 @@ body{
     display: grid;
     padding-top: 2rem;
     grid-template: 
-        "top-area" 1fr
+        "top-area" 25rem
         "bottom-area" 1fr;
 }
 .input-box{
@@ -56,4 +56,12 @@ body{
 .product{
     display: flex;
     background-color: #BFC6C4;
+}
+.goods .product div{
+    display: flex;
+    width: 50%;
+    padding-left: 0.5rem;
+}
+.product .order_amut{
+    border-left: solid 0.15rem;
 }
