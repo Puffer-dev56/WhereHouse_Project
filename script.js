@@ -13,17 +13,33 @@ goods.appendChild(frameOrder);
 
 //history variable
 const history = document.querySelector(".history");
+
 //Product list
 let pros = [];
 
 //Get Product infomation
 function getProduct(){
     let pro = [pro_name.value,pro_amut.value,pro_alert.value,pro_label.value];
-    pros.push(pro);
-    HistoryList(pro);
+    // check if products are in the list
+    for(let i=0; i<pros.length; i++){
+        if(pros[i][0] === pro_name.value){
+            if(parseInt(pro_amut.value) < 0){
+                RemoveStok(pros[i][1],i);
+            }else if(parseInt(pro_amut.value) > 0){
+                AddStock(pros[i][1],i)
+            }
+            return;
+        }
+    }
+    if(parseInt(pro_amut.value) < 0){
+        alert("กรุณากรอกข้อมูลให้ถูกต้อง");
+    }else{
+        pros.push(pro);
+        HistoryList(pro,pro_amut.value,"+");
+    }
 }
 
-//Add Element in Production List
+//Amount of Product Output
 function OrderList(){
     getProduct();
     frameOrder.remove();
@@ -40,22 +56,32 @@ function OrderList(){
         order.append(order_name,order_amut);
         frameOrder.appendChild(order);
     }
+    console.log(pros);
 }
 
-//Add Element in History List 
-function HistoryList(pro){
+//Product History Output
+function HistoryList(pro,amut,operator){
     let order = document.createElement("div");
     order.className = "product";
-    order.innerText = pro[0] + " " + pro[1] + " " + pro[3];
+    order.innerText = pro[0] + " " + operator + amut + " " + pro[3];
     history.appendChild(order);
 }
 
 //remove stock
-function RemoveStok(){
-
+function RemoveStok(amut,i){
+    let newAmut = parseInt(amut) + parseInt(pro_amut.value);
+    if(newAmut < 0){
+        alert("จำนวนสินค้าติดลบ");
+        return;
+    }else{
+        pros[i][1] = newAmut;
+        HistoryList(pros[i],pro_amut.value,"");
+    }
 }
 
 //add on stock
-function AddStock(){
-    
+function AddStock(amut,i){
+    let newAmut = parseInt(amut) + parseInt(pro_amut.value);
+    pros[i][1] = newAmut;
+    HistoryList(pros[i],pro_amut.value,"+"); 
 }
