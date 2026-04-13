@@ -6,10 +6,21 @@ h1{
 }
 body{
     display: grid;
-    padding-top: 2rem;
-    grid-template: 
+    grid-template:
+        "title" 5rem
         "top-area" 25rem
         "bottom-area" 1fr;
+}
+.title{
+    grid-area: title;
+    display: flex;
+    padding-top: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+.title h1{
+    font-weight: 700;
+    font-size: 3rem;
 }
 .input-box{
     grid-area: top-area;

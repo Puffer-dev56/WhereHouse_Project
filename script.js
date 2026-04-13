@@ -23,10 +23,13 @@ function getProduct(){
     // check if products are in the list
     for(let i=0; i<pros.length; i++){
         if(pros[i][0] === pro_name.value){
-            if(parseInt(pro_amut.value) < 0){-
+            if(parseInt(pro_amut.value) < 0){
                 RemoveStok(pros[i][1],i);
             }else if(parseInt(pro_amut.value) > 0){
                 AddStock(pros[i][1],i)
+            }else{
+                editWorning(i);
+                alert("อัพเดทข้อมูลเรียบร้อย");
             }
             return;
         }
@@ -34,9 +37,13 @@ function getProduct(){
     if(parseInt(pro_amut.value) < 0){
         alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }else{
-        pros.push(pro);
-        alert("อัพเดทข้อมูลเรียบร้อย");
-        HistoryList(pro,pro_amut.value,"+");
+        if(pro[0].trim() != "" && pro[1].trim() != "" && pro[2].trim() != "" ){
+            pros.push(pro);
+            alert("อัพเดทข้อมูลเรียบร้อย");
+            HistoryList(pro,pro_amut.value,"+");
+        }else{
+            alert("กรุณากรอกข้อมูลให้ครบ");
+        }
     }
 }
 
@@ -57,7 +64,6 @@ function OrderList(){
         order.append(order_name,order_amut);
         frameOrder.appendChild(order);
     }
-    console.log(pros);
 }
 
 //Product History Output
@@ -76,7 +82,7 @@ function RemoveStok(amut,i){
         return;
     }else{
         pros[i][1] = newAmut;
-        pros[i][3] = pro_label.value;
+        editWorning(i);
         alert("อัพเดทข้อมูลเรียบร้อย");
         HistoryList(pros[i],pro_amut.value,"");
     }
@@ -91,11 +97,17 @@ function proWorning(amut,proAlert){
     }
 }
 
+function editWorning(i){
+    if(pro_alert.value.trim() != ""){
+        pros[i][2] = pro_alert.value;
+    }
+}
+
 //add on stock
 function AddStock(amut,i){
     let newAmut = parseInt(amut) + parseInt(pro_amut.value);
     pros[i][1] = newAmut;
-    pros[i][3] = pro_label.value;
+    editWorning(i);
     alert("อัพเดทข้อมูลเรียบร้อย");
     HistoryList(pros[i],pro_amut.value,"+"); 
 }
