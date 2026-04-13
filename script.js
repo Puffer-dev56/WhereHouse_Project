@@ -35,6 +35,7 @@ function getProduct(){
         alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }else{
         pros.push(pro);
+        alert("อัพเดทข้อมูลเรียบร้อย");
         HistoryList(pro,pro_amut.value,"+");
     }
 }
@@ -76,6 +77,7 @@ function RemoveStok(amut,i){
     }else{
         pros[i][1] = newAmut;
         pros[i][3] = pro_label.value;
+        alert("อัพเดทข้อมูลเรียบร้อย");
         HistoryList(pros[i],pro_amut.value,"");
     }
 }
@@ -94,5 +96,6 @@ function AddStock(amut,i){
     let newAmut = parseInt(amut) + parseInt(pro_amut.value);
     pros[i][1] = newAmut;
     pros[i][3] = pro_label.value;
+    alert("อัพเดทข้อมูลเรียบร้อย");
     HistoryList(pros[i],pro_amut.value,"+"); 
 }

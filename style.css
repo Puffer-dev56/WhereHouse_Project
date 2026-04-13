@@ -1,3 +1,9 @@
+*{
+    font-family: "Google Sans", sans-serif;
+}
+h1{
+    font-weight: 575;
+}
 body{
     display: grid;
     padding-top: 2rem;
@@ -31,20 +37,44 @@ body{
 }
 .input-box #name{
     grid-area: name;
+    border-radius: 5px;
+    border: solid 1.5px;
+    padding-left: 0.25rem;
 }
 .input-box #amut{
     grid-area: amut;
+    border-radius: 5px;
+    border: solid 1.5px;
+    padding-left: 0.25rem;
 }
 .input-box #label{
     grid-area: label;
+    border-radius: 5px;
+    border: solid 1.5px;
+    padding-left: 0.25rem;
 }
 .input-box #alert{
     grid-area: alert;
+    border-radius: 5px;
+    border: solid 1.5px;
+    padding-left: 0.25rem;
 }
 .input-box #btnSave{
     grid-area: btnSave;
+    font-weight: 575;
+    font-size: 0.75rem;
     width: 10rem;
     height: 2.75rem;
+    border-radius: 5px;
+    background-color: transparent;
+    border: solid 1.75px;
+    transition: all 0.3s ease-in-out;
+}
+.input-box #btnSave:hover{
+    background-color: #fca344;
+    cursor: pointer;
+    box-shadow: #FF6500 3px 6px 10px ;
+    border: none;
 }
 .output{
     grid-area: bottom-area;
@@ -53,14 +83,26 @@ body{
     border-bottom: solid 0.15rem;
     width: 20rem;
 }
+.history{
+    min-height: 3rem;
+    margin-top: -0.5rem;
+}
+.history .product{
+    padding: 0.25rem 0rem 0rem 0.5rem;
+}
+.goods{
+    min-height: 3rem;
+    margin-top: -0.5rem;
+}
 .product{
     display: flex;
-    background-color: #BFC6C4;
+    background-color: #EEEEEE;
+    height: 1.5rem;
 }
 .goods .product div{
     display: flex;
     width: 50%;
-    padding-left: 0.5rem;
+    padding: 0.25rem 0rem 0rem 0.5rem;
 }
 .product .order_amut{
     border-left: solid 0.15rem;
@@ -68,11 +110,12 @@ body{
 .proAlert{
     display: flex;
     background-color: #FF3838;
+    height: 1.5rem;
 }
 .goods .proAlert div{
     display: flex;
     width: 50%;
-    padding-left: 0.5rem;
+    padding: 0.25rem 0rem 0rem 0.5rem;
 }
 .proAlert .order_amut{
     border-left: solid 0.15rem;
