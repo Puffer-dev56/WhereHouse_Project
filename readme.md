@@ -54,11 +54,3 @@
 - Google Fonts: IBM Plex Sans Thai, IBM Plex Mono
 - Web Storage API (localStorage) สำหรับบันทึกข้อมูล
 
----
-
-## ข้อจำกัด (Prototype)
-
-- ข้อมูลเก็บใน localStorage ของเครื่องเดียว ไม่ sync ข้ามอุปกรณ์
-- ยังไม่มีระบบ login หรือสิทธิ์ผู้ใช้
-- ยังไม่มีประวัติการรับ/เบิกสินค้า (transaction log)
-- ยังไม่รองรับ export ข้อมูล (CSV / Excel)
