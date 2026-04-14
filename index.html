@@ -13,30 +13,147 @@
 </head>
 
 <body>
-    <div class="title">
-        <h1>คลังสินค้า</h1>
-    </div>
-    <div class="input-box">
-        <input id="name" type="text" placeholder="ชื่อสินค้า">
-        <input id="amut" type="number" placeholder="เพิ่ม/ลด จำนวนสินค้า">
-        <input id="alert" type="number" min="0" placeholder="จำนวนที่ต้องการให้ระบบแจ้งเตือน">
-        <input id="label" type="text" placeholder="บันทึกช่วยจำ">
-        <button id="btnSave">บันทึกรายการสินค้า</button>
-    </div>
-    <div class="output">
-        <div class="container">
-            <h1>รายการสินค้า</h1>
-            <div class="goods">
-                <!-- รายการสินค้าที่อยู่ในคลัง -->
+    <header class="header">
+        <div class="header-brand">
+            <div class="header-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                    <line x1="12" y1="12" x2="12" y2="17" />
+                    <line x1="9" y1="14.5" x2="15" y2="14.5" />
+                </svg>
+            </div>
+            <span class="brand-name">WMS · คลังสินค้า</span>
+        </div>
+        <div class="header-alert hidden" id="headerAlert">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span id="headerAlertText"></span>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Stats -->
+        <div class="stats" id="statsRow">
+            <div class="stat-card">
+                <div class="stat-label">รายการทั้งหมด</div>
+                <div class="stat-value" id="statTotal">0<span class="stat-unit">รายการ</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">จำนวนรวม</div>
+                <div class="stat-value" id="statUnits">0<span class="stat-unit">หน่วย</span></div>
+            </div>
+            <div class="stat-card" id="statLowCard">
+                <div class="stat-label">ใกล้หมด</div>
+                <div class="stat-value" id="statLow">0<span class="stat-unit">รายการ</span></div>
+            </div>
+            <div class="stat-card" id="statEmptyCard">
+                <div class="stat-label">หมดสต็อก</div>
+                <div class="stat-value" id="statEmpty">0<span class="stat-unit">รายการ</span></div>
             </div>
         </div>
-        <div class="container">
-            <h1>ประวัติ</h1>
-            <div class="history">
-                <!-- ประวัติสินค้า -->
+
+        <div class="main-grid">
+            <!-- Left: Add form -->
+            <div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title">เพิ่มสินค้าเข้าคลัง</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="merge-hint" id="mergeHint">
+                            สินค้านี้มีอยู่แล้ว — จะบวกเพิ่มให้อัตโนมัติ
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ชื่อสินค้า</label>
+                            <input type="text" id="inputName" placeholder="พิมพ์หรือเลือกจากรายการ..." list="nameList"
+                                autocomplete="off">
+                            <datalist id="nameList"></datalist>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">จำนวน</label>
+                                <input type="number" id="inputQty" placeholder="0" min="1">
+                            </div>
+                            <div class="form-group" id="unitGroup">
+                                <label class="form-label">หน่วย</label>
+                                <input type="text" id="inputUnit" placeholder="ชิ้น">
+                            </div>
+                        </div>
+                        <div class="form-group" id="thrGroup">
+                            <label class="form-label">แจ้งเตือนเมื่อเหลือน้อยกว่า</label>
+                            <input type="number" id="inputThr" placeholder="10" min="1" value="10">
+                        </div>
+                        <button class="btn btn-primary" onclick="addItem()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            เพิ่มสินค้า
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Table -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">รายการสินค้าในคลัง</span>
+                </div>
+                <div class="panel-body" style="padding-bottom:10px">
+                    <div class="search-row">
+                        <div class="search-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
+                            <input type="search" id="searchInput" placeholder="ค้นหาสินค้า..." oninput="renderTable()">
+                        </div>
+                        <span class="item-count" id="itemCount"></span>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>สินค้า</th>
+                                <th>จำนวน</th>
+                                <th>สถานะ</th>
+                                <th>ระดับ</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Remove Modal -->
+    <div class="overlay" id="removeModal">
+        <div class="modal">
+            <div class="modal-title" id="modalTitle">นำออก: </div>
+            <div class="modal-sub" id="modalSub"></div>
+            <div class="form-group">
+                <label class="form-label">จำนวนที่นำออก</label>
+                <input type="number" id="modalQty" min="1" placeholder="ใส่จำนวน..."
+                    onkeydown="if(event.key==='Enter')confirmRemove()">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="confirmRemove()">นำออก</button>
+                <button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-wrap" id="toastWrap"></div>
 </body>
 <script src="script.js"></script>
 
